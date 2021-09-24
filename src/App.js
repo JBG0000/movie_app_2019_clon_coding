@@ -70,6 +70,10 @@ import PropTypes from "prop-types";
 // }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("hello"); //컴포넌트가 실행(mount)되자마자 실행
+  }
   state = {
     count: 0,
   };
@@ -81,8 +85,17 @@ class App extends React.Component {
   minus=()=>{
     this.setState(current => ({count: current.count - 1 }));
   };
-
+  componentDidMount() {
+    console.log("component rendered"); //render 된 다음에 실행
+  }
+  componentDidUpdate() {
+    console.log("I'm just update")  //컴포넌트가 업데이트될 때 실행
+  }
+  componentWillUnmount() {
+    console.log("Goodbye, cruel world"); //컴포넌트가 unmount되면 실행(동작 확인은 어렵지만 동작함!)
+  }
   render() {
+    console.log("I'm rendering")
     return (
       <div>
         <h1>The number is : {this.state.count}</h1>
