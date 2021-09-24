@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 
 // const foodILike = [
@@ -111,10 +112,12 @@ class App extends React.Component {
     isLoading: true,
     movies: []
   };
+
+  getMovies = async () => {
+    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json")
+  }
   componentDidMount(){
-    setTimeout(() => {  //deley time 함수 : date fetch가 완료되기까지 로딩 걸리는 동안 로딩이라는 상태 나타내기 
-      this.setState({isLoading: false, book: true}); //setState 사용시 변수?를 미리 선언할 필요는 없다(book은 선언되어 있지 않지만 에러는 발생하지 않음)
-    }, 6000)  //6초 false 유지라는 뜻인듯
+    this.getMovies();
   }
   render() {
     const {isLoading} = this.state;
