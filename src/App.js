@@ -74,10 +74,12 @@ class App extends React.Component {
     count: 0,
   };
   add=()=>{
-    console.log("add");
-  };
+    this.setState(current => ({count: current.count + 1 })); //state 직접변경 안됌, setState 사용으로 refresh(변화가 있는 부분만 react가 업데이트)
+  };  //current, state를 set할 때 react에서 외부의 상태에 의존하지 않는 방법
+
+  //setState 함수를 호출할 때마다 react는 rerender
   minus=()=>{
-    console.log("minus");
+    this.setState(current => ({count: current.count - 1 }));
   };
 
   render() {
