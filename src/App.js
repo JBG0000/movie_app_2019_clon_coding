@@ -69,40 +69,57 @@ import PropTypes from "prop-types";
 //   );
 // }
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("hello"); //컴포넌트가 실행(mount)되자마자 실행
-  }
-  state = {
-    count: 0,
-  };
-  add=()=>{
-    this.setState(current => ({count: current.count + 1 })); //state 직접변경 안됌, setState 사용으로 refresh(변화가 있는 부분만 react가 업데이트)
-  };  //current, state를 set할 때 react에서 외부의 상태에 의존하지 않는 방법
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     console.log("hello"); //컴포넌트가 실행(mount)되자마자 실행
+//   }
+//   state = {
+//     count: 0,
+//   };
+//   add=()=>{
+//     this.setState(current => ({count: current.count + 1 })); //state 직접변경 안됌, setState 사용으로 refresh(변화가 있는 부분만 react가 업데이트)
+//   };  //current, state를 set할 때 react에서 외부의 상태에 의존하지 않는 방법
 
-  //setState 함수를 호출할 때마다 react는 rerender
-  minus=()=>{
-    this.setState(current => ({count: current.count - 1 }));
+//   //setState 함수를 호출할 때마다 react는 rerender
+//   minus=()=>{
+//     this.setState(current => ({count: current.count - 1 }));
+//   };
+//   componentDidMount() {
+//     console.log("component rendered"); //render 된 다음에 실행
+//   }
+//   componentDidUpdate() {
+//     console.log("I'm just update")  //컴포넌트가 업데이트될 때 실행
+//   }
+//   componentWillUnmount() {
+//     console.log("Goodbye, cruel world"); //컴포넌트가 unmount되면 실행(동작 확인은 어렵지만 동작함!)
+//   }
+//   render() {
+//     console.log("I'm rendering")
+//     return (
+//       <div>
+//         <h1>The number is : {this.state.count}</h1>
+//         <button onClick={this.add}>App</button>
+//         <button onClick={this.minus}>Minus</button>
+//       </div>
+//     );
+//   }
+// }
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
   };
-  componentDidMount() {
-    console.log("component rendered"); //render 된 다음에 실행
-  }
-  componentDidUpdate() {
-    console.log("I'm just update")  //컴포넌트가 업데이트될 때 실행
-  }
-  componentWillUnmount() {
-    console.log("Goodbye, cruel world"); //컴포넌트가 unmount되면 실행(동작 확인은 어렵지만 동작함!)
+  componentDidMount(){
+    setTimeout(() => {  //deley time 함수 : date fetch가 완료되기까지 로딩 걸리는 동안 로딩이라는 상태 나타내기 
+      this.setState({isLoading: false, book: true}); //setState 사용시 변수?를 미리 선언할 필요는 없다(book은 선언되어 있지 않지만 에러는 발생하지 않음)
+    }, 6000)  //6초 false 유지라는 뜻인듯
   }
   render() {
-    console.log("I'm rendering")
-    return (
-      <div>
-        <h1>The number is : {this.state.count}</h1>
-        <button onClick={this.add}>App</button>
-        <button onClick={this.minus}>Minus</button>
-      </div>
-    );
+    const {isLoading} = this.state;
+    return <div>{this.state.isLoading ? "Loading..." : "We are ready"}</div>;
   }
 }
+
 export default App;
