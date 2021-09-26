@@ -8,16 +8,21 @@ function Movie({ year, title, summary, poster, genres }) {
       {/* 이미지 크롤링 */}
       <img src={poster} alt={title} title={title} />
       <div className="movie__data">
-        <h3 className="movie__title" style={{ backgroundColor: "red" }}>
-          {title}
-        </h3>
+        <h3 className="movie__title">{title}</h3>
         <h5 className="movie__year">{year}</h5>
-        <ul className="genres">
-          {genres.map((genre, index) => ( //두번째 인자는 도는 카운트? 반환(0,1,2 맵 돌때마다 카운팅)
-            <li key={index} className="genres_genre">{genre}</li>
-          ))}
+        <ul className="movie__genres">
+          {genres.map(
+            (
+              genre,
+              index //두번째 인자는 도는 카운트? 반환(0,1,2 맵 돌때마다 카운팅)
+            ) => (
+              <li key={index} className="genres_genre">
+                {genre}
+              </li>
+            )
+          )}
         </ul>
-        <p className="movie__summary">{summary}</p>
+        <p className="movie__summary">{summary.slice(0, 180)}...</p>
       </div>
     </div>
   );
